@@ -1,6 +1,6 @@
 {
   "name": "now-redirect",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI tool based on https://zeit.co/now that setups redirect to another domain",
   "main": "index.js",
   "scripts": {},
