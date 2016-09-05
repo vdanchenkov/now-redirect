@@ -8,6 +8,10 @@
   "bin": {
     "now-redirect": "bin/now-redirect"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vdanchenkov/now-redirect.git"
+  },
   "keywords": [
     "now",
     "redirect"
