@@ -2,6 +2,8 @@
 
 const spawn = require('child_process').spawn
 const path = require('path')
+const ncp = require('copy-paste')
+const chalk = require('chalk')
 
 if (process.argv.length !== 3 || process.argv[2] === '-h' || process.argv[2] === 'help') {
   console.log('Usage: now-redirect <destination-domain>')
@@ -18,15 +20,28 @@ if (!/^https?:\/\//i.test(host)) {
   host = 'http://' + host
 }
 
+// Have to force because otherwise susequent deployments with different envs and same code are ignored
 const flagList = ['-f', '-e', "REDIRECT_HOST=" + host, dir]
 
-const now = spawn(cmd, flagList, { stdio: 'inherit' })
+const now = spawn(cmd, flagList, { stdio: [ 'inherit', 'pipe', 'inherit' ] })
 
 now.on('error', err => console.error(err))
 
+let buffer = ''
+now.stdout.on('data', data => {
+  buffer += data.toString()
+})
+
+console.log(`> Deploying app redirecting to ${host}...`)
 now.on('close', code => {
   if (code === 0) {
-    console.log(`Deployed app will redirect all requests from /* ${host}/*` )
+    const url = buffer
+    ncp.copy(url, () => {
+      console.log(`> Ready! ${chalk.bold(url)} (copied to clipboard)`)
+      console.log(`> Requests from ${chalk.bold(url + '/*')} will be redirected to ${chalk.bold(host + '/*')}`)
+      console.log(`> Check that it works. And if everything is fine alias to production domain with:`)
+      console.log(chalk.bold(`   now alias ${url} your-source-domain`))
+    })
   }
 })
 
