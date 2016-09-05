@@ -1,6 +1,6 @@
 {
   "name": "now-redirect",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool based on https://zeit.co/now that setups redirect to another domain",
   "main": "bin/now-redirect",
   "scripts": {},
