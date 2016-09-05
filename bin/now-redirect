@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const spawn = require('child_process').spawn
+const path = require('path')
+
+const cmd = process.platform === 'win32' ? 'now.cmd' : 'now'
+const dir = path.resolve(__dirname, '..', 'app')
+
+// console.log(process.argv[2])
+// process.exit()
+let host = process.argv[2]
+if (!host) {
+  console.error('Put host name to redirect to as second argument. For example: now-redirect example.com')
+  process.exit(1)
+}
+
+if (!/^https?:\/\//i.test(host)) {
+  host = 'http://' + host
+}
+
+const flagList = ['-f', '-e', "REDIRECT_HOST=" + host, dir]
+
+const now = spawn(cmd, flagList, { stdio: 'inherit' })
+
+now.on('error', err => console.error(err))
+
+now.on('close', code => {
+  if (code === 0) {
+    console.log(`Deployed app will redirect all requests from /* ${host}/*` )
+  }
+})
+
+process.on('SIGINT', () => {
+  now.kill('SIGINT')
+})

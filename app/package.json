@@ -1,0 +1,6 @@
+{
+  "name": "now-redirect",
+  "scripts": {
+    "start": "node index"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "now-redirect",
+  "version": "1.0.0",
+  "description": "CLI tool based on https://zeit.co/now that setups redirect to another domain",
+  "main": "index.js",
+  "scripts": {
+  },
+  "bin": {
+    "now-redirect": "bin/now-redirect"
+  },
+  "keywords": [
+    "now",
+    "redirect"
+  ],
+  "author": "Vladimir Danchenkov <vladimir.danchenkov@gmail.com>",
+  "license": "MIT"
+}
