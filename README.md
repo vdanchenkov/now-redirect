@@ -5,7 +5,7 @@ CLI tool based on [𝚫 now](https://zeit.co/now). It is intended to setup redir
 ## Installation
 
 ```
-npm install -g now-redirect
+npm install -g now now-redirect
 ```
 
 ## Usage
