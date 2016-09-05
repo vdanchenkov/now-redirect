@@ -10,6 +10,8 @@ npm install -g now now-redirect
 
 ## Usage
 
+<img src="screenshot.png" width="839" alt="Screenshot of the app"/>
+
 Given you decided that https://www.example.com will be canonical address of your site. You will need to setup redirect from https://example.com for those users who prefer shorter urls. To accomplish this run from any folder:
 
 ```
