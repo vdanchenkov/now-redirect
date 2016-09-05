@@ -2,11 +2,15 @@
   "name": "now-redirect",
   "version": "1.0.2",
   "description": "CLI tool based on https://zeit.co/now that setups redirect to another domain",
-  "main": "index.js",
+  "main": "bin/now-redirect",
   "scripts": {},
   "bin": {
     "now-redirect": "bin/now-redirect"
   },
+  "files": [
+    "app",
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/vdanchenkov/now-redirect.git"
