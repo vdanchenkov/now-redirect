@@ -32,15 +32,15 @@ now.stdout.on('data', data => {
   buffer += data.toString()
 })
 
-console.log(`> Deploying app redirecting to ${host}...`)
+console.log(`> Deploying app that redirects all requests to ${host}...`)
 now.on('close', code => {
   if (code === 0) {
     const url = buffer
     ncp.copy(url, () => {
-      console.log(`> Ready! ${chalk.bold(url)} (copied to clipboard)`)
-      console.log(`> Requests from ${chalk.bold(url + '/*')} will be redirected to ${chalk.bold(host + '/*')}`)
-      console.log(`> Check that it works. And if everything is fine alias to production domain with:`)
-      console.log(chalk.bold(`   now alias ${url} your-source-domain`))
+      console.log(`${chalk.cyan('> Ready!') ${chalk.bold(url)} (copied to clipboard)`)
+      console.log(`> Requests to ${chalk.bold(url + '/*')} will be redirected to ${chalk.bold(host + '/*')}`)
+      console.log(`> If it works as expected, alias it with:`)
+      console.log(chalk.bold(`  now alias ${url} domain-to-be-redirected`))
     })
   }
 })
