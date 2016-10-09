@@ -28,4 +28,4 @@ You can swap `www.example.com` and `example.com` if you wish requests to `www.ex
 
 ## Example
 
-<img src="screenshot.png" width="839" alt="Screenshot of the app"/>
+<img src="screenshot.png" width="840" alt="Screenshot of the app"/>
