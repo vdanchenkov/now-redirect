@@ -2,7 +2,6 @@
 
 const spawn = require('child_process').spawn
 const path = require('path')
-const fs = require('fs')
 const ncp = require('copy-paste')
 const chalk = require('chalk')
 
@@ -22,11 +21,7 @@ if (!/^https?:\/\//i.test(host)) {
 }
 
 // Have to force because otherwise susequent deployments with different envs and same code are ignored
-const flagList = ['-f', '-e', "REDIRECT_HOST=" + host, dir]
-const nowFile = path.resolve(dir, 'now.json')
-const nowConfig = JSON.parse(fs.readFileSync(nowFile, 'utf-8'))
-nowConfig.name = host
-fs.writeFileSync(nowFile, JSON.stringify(nowConfig))
+const flagList = ['-f', '-e', "REDIRECT_HOST=" + host, dir, "--name=" + host]
 
 const now = spawn(cmd, flagList, { stdio: [ 'inherit', 'pipe', 'inherit' ] })
 
@@ -41,8 +36,6 @@ console.log(`> Deploying app that redirects all requests to ${host}...`)
 now.on('close', code => {
   if (code === 0) {
     const url = buffer
-    nowConfig.name = ''
-    fs.writeFileSync(nowFile, JSON.stringify(nowConfig))
     ncp.copy(url, () => {
       console.log(`${chalk.cyan('> Ready!')} ${chalk.bold(url)} (copied to clipboard)`)
       console.log(`> Requests to ${chalk.bold(url + '/*')} will be redirected to ${chalk.bold(host + '/*')}`)
