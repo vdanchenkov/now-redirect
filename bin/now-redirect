@@ -22,7 +22,7 @@ if (!/^https?:\/\//i.test(host)) {
 
 const deploymentName = host.replace('http://', '')
 
-// Have to force because otherwise susequent deployments with different envs and same code are ignored
+// Have to force because otherwise subsequent deployments with different envs and same code are ignored
 const flagList = ['-f', '-e', "REDIRECT_HOST=" + host, dir, "--name=" + deploymentName]
 
 const now = spawn(cmd, flagList, { stdio: [ 'inherit', 'pipe', 'inherit' ] })
